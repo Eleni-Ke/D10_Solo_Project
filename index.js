@@ -302,8 +302,9 @@ let resultObj = rollTheDices("b");
 let sumOfRolls = resultObj.result1;
 let valuesOfRolls = resultObj.result2;
 
-console.log(resultObj);
-console.log(`The sum of the rolls is ${sumOfRolls} and the values are ${valuesOfRolls}.`);
+//console.log(resultObj);
+//console.log(`The sum of the rolls is ${sumOfRolls} and the values are ${valuesOfRolls}.`);
+
 /* EXERCISE 9
 
 Write a function called howManyDays which receives a date as a parameter and returns the number of days passed since that date.
@@ -311,7 +312,17 @@ Write a function called howManyDays which receives a date as a parameter and ret
 */
 printTitle("Exercise 9");
 
+function howManyDays(date) {
+    if (typeof date === "date") {
+        let todaysDate = new Date();
+        let daysBetween = Math.abs(currentDate - date);
 
+    }
+}
+
+//console.log(new Date());
+
+console.log("NOT FINISHED YET!!!!!")
 
 /* EXERCISE 10
 
@@ -320,7 +331,11 @@ Write a function called isTodayMyBirthday which should return true if today’s 
 */
 printTitle("Exercise 10");
 
+function isTodayMyBirthday(birthday) {
 
+}
+
+console.log("NOT FINISHED YET!!!!!")
 
 // JS Arrays & Objects
 
@@ -335,6 +350,17 @@ and returns the given object after deleting its property named as the given stri
 */
 printTitle("Exercise 11");
 
+let glasses = {
+    price: 20,
+    color: "brown"
+}
+
+function deleteProp(obj, str) {
+    delete obj[str];
+    return obj;
+}
+
+//console.log(deleteProp(glasses, "color"));
 
 
 /* EXERCISE 12
