@@ -607,17 +607,18 @@ function oldestMovie(movieArr) {
     if (Array.isArray(movieArr)) {
         let oldest = movieArr[0];
         for (let i = 0; i < movieArr.length; i++) {
-            if (movieArr[i].Year > oldest.Year) {
+            if (movieArr[i].Year < oldest.Year) {
                 oldest = movieArr[i];
-                console.log("so far so good"); 
             }
         }
+        return oldest;
     } else {
         return "The parameter needs to be an array. Please try again."
     }
 }
-
-console.log(`The oldest movie from the list is ${oldestMovie(movies)}`);
+let oldestFromList = oldestMovie(movies);
+//console.log(oldestFromList);
+//console.log(`The oldest movie from the list is ${oldestFromList.Title}. It was made in ${oldestFromList.Year}.`);
 
 /* EXERCISE 13
 
