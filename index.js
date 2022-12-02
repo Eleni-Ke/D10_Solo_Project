@@ -230,11 +230,17 @@ printTitle("Exercise 6");
 
 function isThisAnEmail(str) {
     if (typeof str === "string") {
-        
+        if (str.includes("@")) {
+            return "This is an email address."
+        } else {
+            return "This is not an email address."
+        }
     } else {
         return "The parameter is not a string, please try again.";
     }
 }
+
+//console.log(`Is this an email? ${isThisAnEmail("eleni.kellermann@hotmail.de")}`);
 
 /* EXERCISE 7
 
@@ -245,8 +251,13 @@ Write a function called whatDayIsIt that should return the current day of the we
 printTitle("Exercise 7");
 
 function whatDayIsIt() {
-    return 
+    let weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    let todaysDate = new Date();
+    let todaysDay = weekday[todaysDate.getDay()];
+    return todaysDay;
 }
+
+//console.log(`Today is ${whatDayIsIt()}.`)
 
 
 /* EXERCISE 8
@@ -270,8 +281,29 @@ values: [3, 3, 4]
 */
 printTitle("Exercise 8");
 
+function rollTheDices(numOfRolls) {
+    if (typeof numOfRolls === "number") {
+        let values = [];
+        let sum = 0;
+        let i = 0;
+        while (i < numOfRolls) {
+            let diceResult = dice();
+            values.push(diceResult);
+            sum += diceResult;
+            i++;
+        }
+       let results = {result1: sum, result2: values};
+       return results;
+    } else {
+        return "The parameters is not a number.";
+    }
+}
+let resultObj = rollTheDices("b");
+let sumOfRolls = resultObj.result1;
+let valuesOfRolls = resultObj.result2;
 
-
+console.log(resultObj);
+console.log(`The sum of the rolls is ${sumOfRolls} and the values are ${valuesOfRolls}.`);
 /* EXERCISE 9
 
 Write a function called howManyDays which receives a date as a parameter and returns the number of days passed since that date.
