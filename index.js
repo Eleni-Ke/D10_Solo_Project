@@ -846,7 +846,7 @@ function halfTree(num) {
         return "The parameter is not a number, please try again."
     }
 }
-halfTree(10);
+//halfTree(10);
 
 /* EXERCISE 22
 
@@ -889,7 +889,19 @@ Create a function called "isItPrime" that receives a number as a parameter and r
 */
 printTitle("Exercise 23");
 
+function isPrime(num) {
+    if (typeof num !== "number") return "it's not a number."
+    if (num <= 1) return false;
+    if (num % 2 == 0 && num > 2) return false;
+    const squareRoot = Math.sqrt(num);
+    for(let i = 3; i <= squareRoot; i += 2) {
+        if(num % i === 0) return false;
+    }
+    return true;
+}
 
+let numberToCheck = 3;
+//console.log(`Number ${numberToCheck} is a prime number: ${isPrime(numberToCheck)}.`)
 
 /* WHEN YOU ARE FINISHED
 
