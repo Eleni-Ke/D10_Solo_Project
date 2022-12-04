@@ -526,7 +526,7 @@ function rollTheDices(numOfRolls) {
         return "The parameters is not a number.";
     }
 }
-let resultObj = rollTheDices("b");
+let resultObj = rollTheDices(4);
 let sumOfRolls = resultObj.result1;
 let valuesOfRolls = resultObj.result2;
 
@@ -545,10 +545,12 @@ function howManyDays(date) {
         let todaysDate = new Date();
         let daysBetween = Math.abs(currentDate - date);
 
+    } else {
+        return "This is not a date, please try again.";
     }
 }
 
-//console.log(new Date());
+console.log(new Date());
 
 console.log("NOT FINISHED YET!!!!!")
 
@@ -627,7 +629,15 @@ Write a function called countMovies which returns the number of movies contained
 */
 printTitle("Exercise 13");
 
+function countMovies() {
+    let numberOfMovies = 0;
+    for (let i = 0; i < movies.length; i++) {
+        numberOfMovies += 1;
+    }
+    return numberOfMovies;
+}
 
+//console.log(`There are ${countMovies()} movies in the List`);
 
 /* EXERCISE 14
 
@@ -636,7 +646,17 @@ Write a function called onlyTheTitles which creates an array with just the title
 */
 printTitle("Exercise 14");
 
+function onlyTheTitles() {
+    let theTitles = [];
+    for (let i = 0; i < movies.length; i++) {
+        theTitles.push(movies[i].Title);
+    }
+    return theTitles;
+}
 
+//console.log(`The movie titles are ${JSON.stringify(onlyTheTitles(), null, 1)}.`);
+
+//JSON.stringify() is making the array more readable. The first parameter is the array, the second is null because I don't want to change the behavior of it and the third parameter say to put 1 space between the elements.
 
 /* EXERCISE 15
 
@@ -645,7 +665,23 @@ Write a function called onlyInThisMillennium which returns only the movies produ
 */
 printTitle("Exercise 15");
 
+function onlyInThisMillennium() {
+    let listOf2000Movies = structuredClone(movies);
+    for (let i = listOf2000Movies.length -1; i >= 0; i--) {
+        if (listOf2000Movies[i].Year < 2000) {
+            listOf2000Movies.splice(listOf2000Movies[i], 1);
+        }
+    }
+    return listOf2000Movies;
+}
+let moviesFrom2000s = onlyInThisMillennium();
 
+/*
+for (let i = 0; i < moviesFrom2000s.length; i++) {
+    console.log(`This movie was made in the 2000s: ${JSON.stringify(moviesFrom2000s[i], null, 1)}`);
+    
+}
+*/
 
 /* EXERCISE 16
 
@@ -653,6 +689,16 @@ Write a function called getMovieById which receives an id as a parameter and ret
 
 */
 printTitle("Exercise 16");
+
+function getMovieById(id) {
+    let searchedMovie;
+    for (let i = 0; i < movies.length; i++) {
+        if (id === movies[i].imdbID) {
+            searchedMovie = movie[i];
+        }
+    }
+    return searchedMovie;
+}
 
 
 
