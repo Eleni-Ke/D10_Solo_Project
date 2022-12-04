@@ -540,19 +540,24 @@ Write a function called howManyDays which receives a date as a parameter and ret
 */
 printTitle("Exercise 9");
 
-function howManyDays(date) {
-    if (typeof date === "date") {
-        let todaysDate = new Date();
-        let daysBetween = Math.abs(currentDate - date);
-
+function howManyDays(yyyy, mm, dd) {
+    if (typeof yyyy === "number" && typeof mm === "number" && typeof dd === "number") {
+        let oneDay = 24 * 60 * 60 * 1000;
+        let chosenDate = new Date(yyyy, mm - 1, dd);
+        let todayDate = new Date();
+        let daysBetween = Math.round((todayDate - chosenDate) / oneDay);
+        if (daysBetween >= 0) {
+            return `${daysBetween} days have passed since this day.`
+        } else {
+            daysBetween *= -1;
+            return `This day will be ${daysBetween} in the future.`
+        }
     } else {
         return "This is not a date, please try again.";
     }
 }
 
-console.log(new Date());
-
-console.log("NOT FINISHED YET!!!!!")
+//console.log(howManyDays(2087, 9, 2));
 
 /* EXERCISE 10
 
@@ -561,11 +566,25 @@ Write a function called isTodayMyBirthday which should return true if today’s 
 */
 printTitle("Exercise 10");
 
-function isTodayMyBirthday(birthday) {
+function isTodayMyBirthday() {
+    let myBirthday = new Date(1992, 12 - 1, 6);
+    let todayDate = new Date();
 
+    if (myBirthday.getDate() === todayDate.getDate() && myBirthday.getMonth() === todayDate.getMonth()) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
-console.log("NOT FINISHED YET!!!!!")
+/*
+if (isTodayMyBirthday()) {
+    console.log("Happy Birthday!!! 🥳"); 
+} else {
+    console.log("Today is not your birthday.");
+}
+*/
+
 
 // JS Arrays & Objects
 
@@ -691,16 +710,20 @@ Write a function called getMovieById which receives an id as a parameter and ret
 printTitle("Exercise 16");
 
 function getMovieById(id) {
-    let searchedMovie;
+    let movieWithThatIdea = {};
     for (let i = 0; i < movies.length; i++) {
         if (id === movies[i].imdbID) {
-            searchedMovie = movie[i];
+            movieWithThatIdea = movies[i];
+            return movieWithThatIdea;
         }
+
     }
-    return searchedMovie;
+    return "The movie with that id is not in the list.";
 }
 
+let searchedMovie = getMovieById("tt0077869");
 
+//console.log(searchedMovie);
 
 /* EXERCISE 17
 
@@ -709,6 +732,15 @@ Write a function called sumAllTheYears which returns the sum of all the years in
 */
 printTitle("Exercise 17");
 
+function sumAllTheYears() {
+    let yearsAdded = 0;
+    for (let i = 0; i < movies.length; i++) {
+        yearsAdded += parseInt(movies[i].Year);
+    }
+    return yearsAdded;
+}
+
+//console.log(`If you sum the years from the movies, you get ${sumAllTheYears()}`);
 
 
 /* EXERCISE 18
@@ -718,7 +750,22 @@ Write a function called searchByTitle which receives a string as a parameter and
 */
 printTitle("Exercise 18");
 
+function searchByTitle(titleStr) {
+    if (typeof titleStr === "string") {
+        let moviesWithThatTitle = [];
+        for (let i = 0; i < movies.length; i++) {
+            if (movies[i].Title.toLowerCase().includes(titleStr.toLowerCase())) {
+                moviesWithThatTitle.push(movies[i]);
+            }
+            
+        }
+        return moviesWithThatTitle
+    } else {
+        return "The parameter is not a string, please try again.";
+    }
+}
 
+//console.log(`The movies including this string are: ${JSON.stringify(searchByTitle("ring"), null, 1)}`);
 
 /* EXERCISE 19
 
@@ -731,7 +778,25 @@ and another array unmatch with all the remaining ones.
 */
 printTitle("Exercise 19");
 
+function searchAndDivide(str) {
+    if (typeof str === "string") {
+        let match = [];
+        let unmatch = [];
+        let sortedMovies = {"Movies with that string": match, "Movies without that string": unmatch};
+        for (let i = 0; i < movies.length; i++) {
+            if (movies[i].Title.toLowerCase().includes(str.toLowerCase())) {
+                match.push(movies[i]);
+            } else {
+                unmatch.push(movies[i]);
+            }
+        }
+        return sortedMovies;
+    } else {
+        return "The parameter is not a string, please try again.";
+    }
+}
 
+//console.log(`The sorted movies are ${JSON.stringify(searchAndDivide("king"), null, 1)}`);
 
 /* EXERCISE 20
 
@@ -740,7 +805,16 @@ Write a function called "removeIndex" which receives a number as a parameter and
 */
 printTitle("Exercise 20");
 
-
+function removeIndex(num) {
+    if (typeof num === "number" && num >= 0 && num <= movies.length) {
+        let moviesWithOneRemoved = structuredClone(movies);
+        moviesWithOneRemoved.splice(num, 1);
+        return moviesWithOneRemoved;
+    } else {
+        return "The parameter is not a number or is too high/low, please try again.";
+    }
+}
+//console.log(`The Array without the item in that position is ${JSON.stringify(removeIndex(4), null, 1)}`);
 
 // [EXTRAS] JS Advanced
 
@@ -761,7 +835,18 @@ halfTree(3)
 */
 printTitle("Exercise 21");
 
-
+function halfTree(num) {
+    let numOfStars = "*";
+    if (typeof num === "number") {
+        for (let i = 0; i < num; i++) {
+            console.log(numOfStars);
+            numOfStars += "*";
+        }
+    } else {
+        return "The parameter is not a number, please try again."
+    }
+}
+halfTree(10);
 
 /* EXERCISE 22
 
@@ -780,6 +865,21 @@ tree(3)
 */
 printTitle("Exercise 22");
 
+function tree(num) {
+    let numOfSpaces = " ".repeat(num + 1);
+    let numOfStars = "*";
+    if (typeof num === "number") {
+        for (let i = 0; i < num; i++) {
+            console.log(numOfSpaces + numOfStars);
+            numOfStars += "**";
+            numOfSpaces = " ".repeat(num - i);
+        }
+    } else {
+        return "The parameter is not a number, please try again."
+    }
+}
+
+//tree(5);
 
 
 /* EXERCISE 23
